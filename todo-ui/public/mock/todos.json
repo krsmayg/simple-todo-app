@@ -1,6 +1,5 @@
-{
-  
-"todos": [
+
+ [
  {
     "id": 1,
     "todo": "Do something nice for someone you care about",
@@ -37,4 +36,3 @@
   }
 ]
  
-}
