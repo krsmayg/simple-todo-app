@@ -5,7 +5,7 @@ using todo_api.Data;
 
 namespace todo_api.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/todos/")]
     [ApiController]
     public class TodoController : ControllerBase
     {
@@ -15,15 +15,15 @@ namespace todo_api.Controllers
         }
 
 
-        [HttpGet("/GetAll")]
-        public JsonResult GetAll() { 
+        [HttpGet]
+        public ActionResult<IEnumerable<Todo>> GetAll() { 
             var res = _context.Todos.ToList();
 
-            return new JsonResult(Ok(res));
+            return Ok(res);
         }
 
         [HttpPost]
-        public JsonResult CreateEdit(Todo newTodo)
+        public ActionResult<Todo> CreateEdit([FromBody] Todo newTodo)
         {
             if (newTodo.Id == 0)
             {
@@ -33,25 +33,25 @@ namespace todo_api.Controllers
                 var todoInDb = _context.Todos.Find(newTodo.Id);
                 if (todoInDb == null)
                 {
-                    return new JsonResult(NotFound());
+                    return NotFound();
                 }
                 _context.Entry(todoInDb).CurrentValues.SetValues(newTodo);
             }
             _context.SaveChanges(); 
-            return new JsonResult(Ok(newTodo)); 
+            return Ok(newTodo); 
         }
 
         [HttpDelete]
-        public JsonResult Delete(int id)
+        public ActionResult<Todo> Delete(int id)
         {
             var todoInDb = _context.Todos.Find(id);
             if (todoInDb == null)
             {
-                return new JsonResult(NotFound());
+                return NotFound();
             }
             _context.Todos.Remove(todoInDb);
             _context.SaveChanges();
-            return new JsonResult(NoContent());
+            return NoContent();
         }
 
     }
