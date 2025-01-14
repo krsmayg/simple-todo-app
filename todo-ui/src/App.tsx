@@ -1,13 +1,16 @@
-import { useState } from "react"
-import { Todo } from "./types";
+
+import Header from "./ui/Header";
+import ToDoList from "./components/ToDoList";
+import ToDoForm from "./components/ToDoForm";
 
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([])
+ 
   return (
-    <div>
-      
+    <div className="App">
+      <Header />
+      <ToDoForm />
     </div>
-  )
-};
-export default App
+  );
+}
+export default App;
