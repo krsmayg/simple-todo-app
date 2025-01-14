@@ -2,14 +2,14 @@ import { Todo } from "@/types";
 
 interface ToDoItemProps extends Todo {
   onDelete: (id: Todo['id']) => void,
-  onCheck: (id: Todo['id']) => void
+  onCheck: (newToDo: Todo) => void
 }
 
-const ToDoItem = ({id, todo, completed, onDelete, onCheck }: ToDoItemProps) => {
+const ToDoItem = ({id, title, completed, onDelete, onCheck }: ToDoItemProps) => {
   return (
     <li>
-      <input type="checkbox" checked={completed} onChange={() => onCheck(id)} />
-      <span>{todo}</span>
+      <input type="checkbox" checked={completed} onChange={() => onCheck({id, title, completed})} />
+      <span>{title}</span>
       <span onClick={() => onDelete(id)}>&times;</span>
     </li>
   );

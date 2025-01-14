@@ -3,20 +3,22 @@ import ToDoItem from "./ToDoItem";
 
 interface ToDoListProps {
   todos: Todo[];
+  handleClick: (id: Todo['id']) => void,
+  handleCheck: (newToDo: Todo) => void
 }
 
-function ToDoList({ todos }: ToDoListProps) {
+function ToDoList({ todos, handleClick, handleCheck }: ToDoListProps) {
   return (
     <ul>
-      {todos.map(({ id, todo, completed }: Todo) => {
+      {todos.map(({ id, title, completed }: Todo) => {
         return (
           <ToDoItem
             id={id}
             key={id}
             completed={completed}
-            todo={todo}
-            onCheck={() => {}}
-            onDelete={() => {}}
+            title={title}
+            onCheck={handleCheck}
+            onDelete={handleClick}
           />
         );
       })}
